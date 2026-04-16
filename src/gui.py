@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import time
 from config.config import Config
+import math
 
 
 class Gui:
