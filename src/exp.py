@@ -1,8 +1,12 @@
 # inside project/src folder
 
+from config.config import Config
+
+
 class Exp:
     def __init__(self, the_gui):
         self.gui = the_gui
+        self.tasks = {}
 
     def add_task(self, name, difficulty):
         """
@@ -13,8 +17,15 @@ class Exp:
         Returns:
             str: empty str if valid add, error message if invalid add
         """
-        pass
-      
+        name = name.strip()
+        if not name:
+            return "Task name cannot be empty"
+        if name in self.tasks:
+            return 'Task names "{name}" already exists'
+        if not isinstance(difficulty, int) or not (1 <= difficulty <= 5):
+            return "Difficulty must be an integer between 1 and 5"
+        self.tasks[name] = difficulty
+        return ""
 
     def run(self, total_time):
         """
@@ -23,10 +34,13 @@ class Exp:
             total_time (int): total uninterrupted minutes available
         Returns:
             schedule (list of dict): the calculated schedule
-            
         """
-        pass
-      
+        if not self.tasks:
+            return "No tasks added: please add at least one"
+        if not isinstance(total_time, int) or not (0 < total_time):
+            return "Total time must be an integer greater than 0"
+
+        return self.calculate_breaks(self.tasks, total_time)
 
     def clear(self):
         """
@@ -34,8 +48,7 @@ class Exp:
         Parameters: none
         Returns: none
         """
-        pass
-      
+        self.tasks = {}
 
     def calculate_breaks(self, tasks, total_time):
         """
@@ -55,7 +68,13 @@ class Exp:
             study_time        = difficulty * 10 / factor
             break_time        = (5 + difficulty) / factor
         """
-        pass
+        total_time_needed = sum(d * 10 for d in tasks.values())
+        factor = total_time_needed / total_time
+
+        schedule = []
+        for name, difficulty in tasks.items():
+            study_time = math.ceil()
+            break_time = math.ceil()
 
 
 # if possible:
@@ -63,4 +82,3 @@ class Exp:
 #     Child class that inherits from Exp
 #     Adapts study time management for chores
 #     Inherits add_task, run, clear, calculate_breaks
-
