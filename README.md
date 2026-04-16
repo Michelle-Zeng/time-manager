@@ -11,7 +11,7 @@
 
 If time permits, I will use the previously described project as a parent class and build a child class for chore time management that inherits the functions/variables.   
 
-
+test
 
 ## **Functions**:
 - __init__(self gui)
